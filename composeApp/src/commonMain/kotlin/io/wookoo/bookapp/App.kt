@@ -1,4 +1,4 @@
-package org.company.app
+package io.wookoo.bookapp
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
@@ -13,8 +13,8 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import bookmultiplatform.composeapp.generated.resources.*
-import org.company.app.theme.AppTheme
-import org.company.app.theme.LocalThemeIsDark
+import io.wookoo.bookapp.theme.AppTheme
+import io.wookoo.bookapp.theme.LocalThemeIsDark
 import kotlinx.coroutines.isActive
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource

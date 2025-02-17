@@ -1,5 +1,5 @@
 import androidx.compose.ui.window.ComposeUIViewController
-import org.company.app.App
+import io.wookoo.bookapp.App
 import platform.UIKit.UIViewController
 
 fun MainViewController(): UIViewController = ComposeUIViewController { App() }

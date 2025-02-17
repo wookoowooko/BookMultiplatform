@@ -83,14 +83,14 @@ kotlin {
 }
 
 android {
-    namespace = "org.company.app"
+    namespace = "io.wookoo.bookapp"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 21
         targetSdk = 35
 
-        applicationId = "org.company.app.androidApp"
+        applicationId = "io.wookoo.bookapp.genry"
         versionCode = 1
         versionName = "1.0.0"
 

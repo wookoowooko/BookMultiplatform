@@ -1,4 +1,4 @@
-package org.company.app
+package io.wookoo.bookapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

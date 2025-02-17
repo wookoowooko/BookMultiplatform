@@ -1,4 +1,4 @@
-package org.company.app.theme
+package io.wookoo.bookapp.theme
 
 import android.app.Activity
 import androidx.compose.runtime.Composable
