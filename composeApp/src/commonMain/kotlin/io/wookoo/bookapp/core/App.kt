@@ -1,4 +1,4 @@
-package io.wookoo.bookapp
+package io.wookoo.bookapp.core
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image

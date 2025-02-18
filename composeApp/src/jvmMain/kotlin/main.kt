@@ -5,7 +5,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import java.awt.Dimension
-import io.wookoo.bookapp.App
+import io.wookoo.bookapp.core.App
 
 fun main() = application {
     Window(
