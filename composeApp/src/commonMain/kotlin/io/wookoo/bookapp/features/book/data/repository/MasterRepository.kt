@@ -8,7 +8,7 @@ import io.wookoo.bookapp.features.book.data.network.IRemoteBookDataSource
 import io.wookoo.bookapp.features.book.domain.BookModel
 import io.wookoo.bookapp.features.book.domain.IBookRepository
 
-class DefaultBookRepositoryImpl(
+class MasterRepository(
     private val remoteBookDataSource: IRemoteBookDataSource,
 ) : IBookRepository {
     override suspend fun searchBooks(query: String)

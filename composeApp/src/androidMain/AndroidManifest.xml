@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".BookApp"
         android:icon="@mipmap/ic_launcher"
         android:label="BookMultiplatform"
         android:theme="@android:style/Theme.Material.NoActionBar">

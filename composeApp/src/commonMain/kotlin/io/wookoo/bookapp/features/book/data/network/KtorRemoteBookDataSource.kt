@@ -10,7 +10,7 @@ import io.wookoo.bookapp.features.book.data.dto.SearchResponseDto
 
 private const val BASE_URL = "https://openlibrary.org"
 
-class KtorIRemoteBookDataSource(
+class KtorRemoteBookDataSource(
     private val httpClient: HttpClient,
 ) : IRemoteBookDataSource {
     override suspend fun searchBooks(

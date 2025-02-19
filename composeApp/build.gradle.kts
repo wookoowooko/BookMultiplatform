@@ -62,6 +62,8 @@ kotlin {
             implementation(libs.androidx.activityCompose)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.androidx.compose)
+            implementation(libs.koin.android)
         }
 
         jvmMain.dependencies {
