@@ -47,11 +47,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation.composee)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
-            implementation(libs.coil)
-            implementation(libs.coil.network.ktor)
+            implementation(libs.bundles.coil)
+            implementation(libs.bundles.koin)
             implementation(libs.multiplatformSettings)
             implementation(libs.kotlinx.datetime)
         }
