@@ -1,11 +1,11 @@
-import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import java.awt.Dimension
+import io.ktor.client.engine.okhttp.OkHttp
 import io.wookoo.bookapp.core.App
+import java.awt.Dimension
 
 fun main() = application {
     Window(
@@ -14,10 +14,10 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
     ) {
         window.minimumSize = Dimension(350, 600)
-        App()
+        App(
+            engine = remember {
+                OkHttp.create()
+            }
+        )
     }
 }
-
-@Preview
-@Composable
-fun AppPreview() { App() }
