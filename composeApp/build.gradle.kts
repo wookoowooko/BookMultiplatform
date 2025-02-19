@@ -39,18 +39,13 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.client.serialization)
-            implementation(libs.ktor.client.logging)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation.composee)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.coil)
-            implementation(libs.coil.network.ktor)
+            implementation(libs.bundles.coil)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.ktor)
             implementation(libs.multiplatformSettings)
             implementation(libs.kotlinx.datetime)
         }
@@ -67,6 +62,8 @@ kotlin {
             implementation(libs.androidx.activityCompose)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.androidx.compose)
+            implementation(libs.koin.android)
         }
 
         jvmMain.dependencies {
@@ -83,14 +80,14 @@ kotlin {
 }
 
 android {
-    namespace = "org.company.app"
+    namespace = "io.wookoo.bookapp"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 21
         targetSdk = 35
 
-        applicationId = "org.company.app.androidApp"
+        applicationId = "io.wookoo.bookapp.genry"
         versionCode = 1
         versionName = "1.0.0"
 
