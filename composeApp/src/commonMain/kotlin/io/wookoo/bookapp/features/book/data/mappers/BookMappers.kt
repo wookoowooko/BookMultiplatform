@@ -4,7 +4,7 @@ import io.wookoo.bookapp.features.book.data.dto.SearchedBookDto
 import io.wookoo.bookapp.features.book.domain.BookModel
 
 fun SearchedBookDto.toBookModel() = BookModel(
-    id = id,
+    id = id.substringAfterLast("/"),
     title = title,
     imgUrl = if (coverKey != null) {
         "https://covers.openlibrary.org/b/olid/$coverKey-L.jpg"
