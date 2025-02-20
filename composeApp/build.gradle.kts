@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.buildConfig)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -30,6 +32,9 @@ kotlin {
             isStatic = true
         }
     }
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 
     sourceSets {
         commonMain.dependencies {
@@ -46,8 +51,9 @@ kotlin {
             implementation(libs.bundles.coil)
             implementation(libs.bundles.koin)
             implementation(libs.bundles.ktor)
-            implementation(libs.multiplatformSettings)
-            implementation(libs.kotlinx.datetime)
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
+
         }
 
         commonTest.dependencies {
@@ -74,6 +80,10 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+        }
+
+        dependencies {
+            ksp(libs.androidx.room.compiler)
         }
 
     }
