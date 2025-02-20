@@ -1,6 +1,7 @@
 package io.wookoo.bookapp.book.data.mappers
 
 import io.wookoo.bookapp.book.data.dto.SearchedBookDto
+import io.wookoo.bookapp.book.database.BookEntity
 import io.wookoo.bookapp.book.domain.BookModel
 
 fun SearchedBookDto.toBookModel() =
@@ -21,3 +22,18 @@ fun SearchedBookDto.toBookModel() =
         numPages = numPagesMedian,
         ratingCount = ratingsCount
     )
+
+fun BookModel.toBookEntity(): BookEntity {
+    return BookEntity(
+        id = id,
+        title = title,
+        description = description,
+        languages = languages,
+        authors = authors,
+        firstPublishYear = firstPublishYear,
+        ratingAverage = averageRating,
+        ratingsCount = ratingCount,
+        numPagesMedian = numPages,
+        numEditions = numEditions
+    )
+}
