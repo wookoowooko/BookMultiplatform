@@ -26,6 +26,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -79,10 +81,21 @@ fun BookListScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
     val pagerState = rememberPagerState { 2 }
     val searchResultsListState = rememberLazyListState()
-    val favoritesBooksListState = rememberLazyListState()
+    val searchResultListScrollPosition = rememberSaveable { mutableStateOf(0) }
+    val favoriteBooksListState = rememberLazyListState()
+    val favoriteBooksListScrollPosition = rememberSaveable { mutableStateOf(0) }
 
-    LaunchedEffect(state.searchResults) {
-        searchResultsListState.animateScrollToItem(0)
+    LaunchedEffect(state.searchResults, state.favoriteBooks) {
+        searchResultsListState.animateScrollToItem(searchResultListScrollPosition.value)
+        favoriteBooksListState.animateScrollToItem(favoriteBooksListScrollPosition.value)
+    }
+
+    LaunchedEffect(searchResultsListState.firstVisibleItemIndex) {
+        searchResultListScrollPosition.value = searchResultsListState.firstVisibleItemIndex
+    }
+
+    LaunchedEffect(favoriteBooksListState.firstVisibleItemIndex) {
+        favoriteBooksListScrollPosition.value = favoriteBooksListState.firstVisibleItemIndex
     }
     LaunchedEffect(state.selectedTabIndex) {
         pagerState.animateScrollToPage(state.selectedTabIndex)
@@ -227,7 +240,7 @@ fun BookListScreen(
                                     )
                                 } else {
                                     BookList(
-                                        scrollState = favoritesBooksListState,
+                                        scrollState = favoriteBooksListState,
                                         modifier = Modifier.fillMaxSize(),
                                         books = state.favoriteBooks,
                                         onBookClick = {
