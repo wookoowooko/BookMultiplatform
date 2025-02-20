@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -45,6 +46,7 @@ import io.wookoo.bookapp.book.presentation.features.booklist.components.BookList
 import io.wookoo.bookapp.book.presentation.features.booklist.components.BookSearchBar
 import io.wookoo.bookapp.book.presentation.features.booklist.mvi.BookListContract
 import io.wookoo.bookapp.book.presentation.features.booklist.mvi.BookListViewModel
+import io.wookoo.bookapp.core.presentation.PulseAnimation
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -175,7 +177,9 @@ fun BookListScreen(
                         when (pageIndex) {
                             0 -> {
                                 if (state.isLoading) {
-                                    CircularProgressIndicator()
+                                    PulseAnimation(
+                                        modifier = Modifier.size(60.dp)
+                                    )
                                 } else {
                                     when {
                                         state.errorMessage != null -> {
