@@ -1,9 +1,7 @@
-import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import io.ktor.client.engine.okhttp.OkHttp
 import io.wookoo.bookapp.core.App
 import io.wookoo.bookapp.di.initKoin
 import java.awt.Dimension
@@ -17,11 +15,7 @@ fun main() {
             onCloseRequest = ::exitApplication,
         ) {
             window.minimumSize = Dimension(350, 600)
-            App(
-                engine = remember {
-                    OkHttp.create()
-                }
-            )
+            App()
         }
     }
 }
