@@ -4,10 +4,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import io.wookoo.bookapp.features.book.domain.BookModel
-import io.wookoo.bookapp.features.book.presentation.booklist.components.BookSearchBar
-import io.wookoo.bookapp.features.book.presentation.booklist.mvi.BookListContract
-import io.wookoo.bookapp.features.book.presentation.booklist.screen.BookListScreen
+import io.wookoo.bookapp.book.domain.BookModel
+import io.wookoo.bookapp.book.presentation.features.booklist.components.BookSearchBar
+import io.wookoo.bookapp.book.presentation.features.booklist.mvi.BookListContract
+import io.wookoo.bookapp.book.presentation.features.booklist.screen.BookListScreen
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
