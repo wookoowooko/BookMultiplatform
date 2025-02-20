@@ -4,8 +4,8 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import io.wookoo.bookapp.book.data.network.IRemoteBookDataSource
 import io.wookoo.bookapp.book.data.network.KtorRemoteBookDataSource
 import io.wookoo.bookapp.book.data.repository.MasterRepository
-import io.wookoo.bookapp.book.database.DatabaseFactory
-import io.wookoo.bookapp.book.database.FavoriteBookDatabase
+import io.wookoo.bookapp.book.database.construct.DatabaseFactory
+import io.wookoo.bookapp.book.database.construct.FavoriteBookDatabase
 import io.wookoo.bookapp.book.domain.IBookRepository
 import io.wookoo.bookapp.book.presentation.features.SelectedBookViewModel
 import io.wookoo.bookapp.book.presentation.features.bookdetail.mvi.BookDetailViewModel

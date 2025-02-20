@@ -135,9 +135,9 @@ fun BookListItem(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
-                book.authors.firstOrNull()?.let { authorName ->
+                book.authors.firstOrNull()?.let { author ->
                     Text(
-                        text = authorName,
+                        text = author.name,
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
