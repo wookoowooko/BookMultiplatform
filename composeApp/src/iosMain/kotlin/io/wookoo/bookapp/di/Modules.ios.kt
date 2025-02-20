@@ -2,7 +2,7 @@ package io.wookoo.bookapp.di
 
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.darwin.Darwin
-import io.wookoo.bookapp.book.database.DatabaseFactory
+import io.wookoo.bookapp.book.database.construct.DatabaseFactory
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

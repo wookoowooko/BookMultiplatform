@@ -1,4 +1,4 @@
-package io.wookoo.bookapp.book.database
+package io.wookoo.bookapp.book.database.construct
 
 import android.content.Context
 import androidx.room.Room

@@ -4,7 +4,10 @@ import androidx.sqlite.SQLiteException
 import io.wookoo.bookapp.book.data.mappers.toBookEntity
 import io.wookoo.bookapp.book.data.mappers.toBookModel
 import io.wookoo.bookapp.book.data.network.IRemoteBookDataSource
-import io.wookoo.bookapp.book.database.FavoriteBookDao
+import io.wookoo.bookapp.book.database.daos.FavoriteBookDao
+import io.wookoo.bookapp.book.database.entities.AuthorEntity
+import io.wookoo.bookapp.book.database.entities.BookLanguageAuthorCrossRef
+import io.wookoo.bookapp.book.database.entities.LanguageEntity
 import io.wookoo.bookapp.book.domain.BookModel
 import io.wookoo.bookapp.book.domain.IBookRepository
 import io.wookoo.bookapp.core.domain.AppResult
@@ -26,7 +29,7 @@ class MasterRepository(
     }
 
     override suspend fun getBookDescription(bookId: String): AppResult<String?, DataError> {
-        val localResult = favoriteBookDao.getFavoriteBookById(bookId)
+        val localResult = favoriteBookDao.getBookWithLanguagesAndAuthors(bookId)
 
         return if (localResult == null) {
             remoteBookDataSource.getBookDetails(bookId)
@@ -34,32 +37,55 @@ class MasterRepository(
                     it.description
                 }
         } else {
-            AppResult.Success(localResult.description)
+            AppResult.Success(localResult.book.description)
         }
     }
 
+
     override fun getFavoriteBooks(): Flow<List<BookModel>> {
-        return favoriteBookDao.getFavoriteBooks().map { bookEntities ->
-            bookEntities.map { it.toBookModel() }
+        return favoriteBookDao.getFavoriteBooksWithLanguagesAndAuthors().map { booksWithLanguages ->
+            booksWithLanguages.map { it.toBookModel() }
         }
     }
+
 
     override fun isBookFavorite(id: String): Flow<Boolean> {
         return favoriteBookDao
-            .getFavoriteBooks()
+            .getFavoriteBooksWithLanguagesAndAuthors()
             .map { bookEntities ->
-                bookEntities.any { it.id == id }
+                bookEntities.any { it.book.id == id }
             }
     }
 
+
     override suspend fun markAsFavorite(book: BookModel): EmptyResult<DataError.Local> {
         return try {
-            favoriteBookDao.upsert(book.toBookEntity())
+            val bookEntity = book.toBookEntity()
+            val languageEntities = book.languages.map { LanguageEntity(it.langCode) }
+            val authorEntities = book.authors.map { AuthorEntity(it.name) }
+
+            val crossRefs = book.languages.flatMap { language ->
+                book.authors.map { author ->
+                    BookLanguageAuthorCrossRef(
+                        bookId = book.id,
+                        languageCode = language.langCode,
+                        authorId = author.name
+                    )
+                }
+            }
+            favoriteBookDao.markAsFavoriteTransaction(
+                bookEntity = bookEntity,
+                languageEntities = languageEntities,
+                authorEntities = authorEntities,
+                crossRefs = crossRefs
+            )
+
             AppResult.Success(Unit)
         } catch (e: SQLiteException) {
             AppResult.Error(DataError.Local.DISK_FULL)
         }
     }
+
 
     override suspend fun deleteFromFavorites(id: String) {
         favoriteBookDao.deleteFavoriteBookById(id)

@@ -15,7 +15,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -93,7 +92,7 @@ private fun BookDetailsScreen(
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = state.book.authors.joinToString(),
+                    text = state.book.authors.joinToString(", ") { it.name },
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center
                 )
@@ -145,7 +144,7 @@ private fun BookDetailsScreen(
                                     modifier = Modifier.padding(2.dp)
                                 ) {
                                     Text(
-                                        text = language.uppercase(),
+                                        text = language.langCode.uppercase(),
                                         style = MaterialTheme.typography.bodyMedium
                                     )
                                 }

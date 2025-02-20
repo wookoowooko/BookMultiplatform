@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import io.wookoo.bookapp.book.domain.AuthorModel
 import io.wookoo.bookapp.book.domain.BookModel
 import io.wookoo.bookapp.book.presentation.features.booklist.components.BookSearchBar
 import io.wookoo.bookapp.book.presentation.features.booklist.mvi.BookListContract
@@ -41,7 +42,7 @@ private val books = (1..100).map {
         id = it.toString(),
         title = "Book $it",
         imgUrl = "https://test.com",
-        authors = listOf("Author"),
+        authors = listOf(AuthorModel("Author $it")),
         description = "Description $it",
         languages = emptyList(),
         firstPublishYear = null,

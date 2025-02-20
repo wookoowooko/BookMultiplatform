@@ -1,4 +1,4 @@
-package io.wookoo.bookapp.book.database
+package io.wookoo.bookapp.book.database.construct
 
 import androidx.room.RoomDatabaseConstructor
 
