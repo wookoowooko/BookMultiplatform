@@ -1,5 +1,7 @@
 package io.wookoo.bookapp.core
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -34,7 +36,10 @@ internal fun App() = AppTheme {
         navigation<Route.BookGraph>(
             startDestination = Route.BookList
         ) {
-            composable<Route.BookList> {
+            composable<Route.BookList>(
+                exitTransition = { slideOutHorizontally() },
+                popEnterTransition = { slideInHorizontally() }
+            ) {
                 val viewModel = koinViewModel<BookListViewModel>()
                 val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(
                     navController = navController
@@ -50,7 +55,18 @@ internal fun App() = AppTheme {
                     }
                 )
             }
-            composable<Route.BookDetail> {
+            composable<Route.BookDetail>(
+                enterTransition = {
+                    slideInHorizontally { initialOffset ->
+                        initialOffset
+                    }
+                },
+                exitTransition = {
+                    slideOutHorizontally { initialOffset ->
+                        initialOffset
+                    }
+                }
+            ) {
                 val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(
                     navController = navController
                 )
@@ -58,7 +74,7 @@ internal fun App() = AppTheme {
                 val viewModel = koinViewModel<BookDetailViewModel>()
 
                 LaunchedEffect(selectedBook) {
-                    selectedBook?.let { book->
+                    selectedBook?.let { book ->
                         viewModel.onIntent(
                             BookDetailsContract.OnBookDetailIntent.OnSelectedBookChange(book)
                         )

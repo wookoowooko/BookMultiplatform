@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
@@ -38,6 +39,7 @@ import io.wookoo.bookapp.book.presentation.features.bookdetail.components.ChipSi
 import io.wookoo.bookapp.book.presentation.features.bookdetail.components.TitledContent
 import io.wookoo.bookapp.book.presentation.features.bookdetail.mvi.BookDetailViewModel
 import io.wookoo.bookapp.book.presentation.features.bookdetail.mvi.BookDetailsContract
+import io.wookoo.bookapp.core.presentation.PulseAnimation
 import io.wookoo.bookapp.core.presentation.SandYellow
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.round
@@ -163,7 +165,9 @@ private fun BookDetailsScreen(
                         )
                 )
                 if (state.isLoading) {
-                    CircularProgressIndicator()
+                    PulseAnimation(
+                        modifier = Modifier.size(60.dp)
+                    )
                 } else {
                     Text(
                         text = state.book.description
