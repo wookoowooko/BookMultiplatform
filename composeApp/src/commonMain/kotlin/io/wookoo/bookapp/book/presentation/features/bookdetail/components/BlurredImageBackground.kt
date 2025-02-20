@@ -50,6 +50,8 @@ import io.wookoo.bookapp.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+private const val TAG = "BlurredImageBackground"
+
 @Composable
 fun BlurredImageBackground(
     imageUrl: String?,
@@ -59,6 +61,9 @@ fun BlurredImageBackground(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
+
+    println("$TAG: isFavorite: $isFavorite")
+
     var imageLoadResult by remember {
         mutableStateOf<Result<Painter>?>(null)
     }
