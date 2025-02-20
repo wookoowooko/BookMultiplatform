@@ -9,6 +9,8 @@ import io.wookoo.bookapp.book.data.repository.MasterRepository
 import io.wookoo.bookapp.core.domain.onSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -23,17 +25,26 @@ class BookDetailViewModel(
     private val _state = MutableStateFlow(BookDetailsContract.BookDetailsState())
     val state = _state.onStart {
         fetchBookDescription()
+        observeFavoritesStatus()
     }.stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            _state.value
-        )
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        _state.value
+    )
 
     fun onIntent(intent: BookDetailsContract.OnBookDetailIntent) {
         when (intent) {
             is BookDetailsContract.OnBookDetailIntent.OnBackClick -> {}
             is BookDetailsContract.OnBookDetailIntent.OnFavouriteClick -> {
-
+                viewModelScope.launch {
+                    if (state.value.isFavorite) {
+                        bookRepository.deleteFromFavorites(bookId)
+                    } else {
+                        state.value.book?.let { book ->
+                            bookRepository.markAsFavorite(book)
+                        }
+                    }
+                }
             }
 
             is BookDetailsContract.OnBookDetailIntent.OnSelectedBookChange -> {
@@ -44,6 +55,18 @@ class BookDetailViewModel(
                 }
             }
         }
+    }
+
+    private fun observeFavoritesStatus() {
+        bookRepository
+            .isBookFavorite(bookId)
+            .onEach { isFavorite ->
+                _state.update {
+                    it.copy(
+                        isFavorite = isFavorite
+                    )
+                }
+            }.launchIn(viewModelScope)
     }
 
     private fun fetchBookDescription() {

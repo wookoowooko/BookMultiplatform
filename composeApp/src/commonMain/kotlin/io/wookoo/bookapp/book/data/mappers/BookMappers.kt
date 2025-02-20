@@ -34,6 +34,26 @@ fun BookModel.toBookEntity(): BookEntity {
         ratingAverage = averageRating,
         ratingsCount = ratingCount,
         numPagesMedian = numPages,
-        numEditions = numEditions
+        numEditions = numEditions,
+        imgUrl = imgUrl
     )
 }
+
+fun BookEntity.toBookModel(): BookModel {
+    return BookModel(
+        id = id,
+        title = title,
+        description = description,
+        languages = languages,
+        authors = authors,
+        firstPublishYear = firstPublishYear,
+        averageRating = ratingAverage,
+        ratingCount = ratingsCount,
+        numPages = numPagesMedian,
+        numEditions = numEditions,
+        imgUrl = imgUrl,
+    )
+}
+
+
+

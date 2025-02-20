@@ -8,7 +8,7 @@ object BookListContract {
     data class BookListState(
         val searchQuery: String = "Kotin",
         val searchResults: List<BookModel> = emptyList(),
-        val favouriteBooks: List<BookModel> = emptyList(),
+        val favoriteBooks: List<BookModel> = emptyList(),
         val isLoading: Boolean = true,
         val selectedTabIndex: Int = 0,
         val errorMessage: UiText? = null,
